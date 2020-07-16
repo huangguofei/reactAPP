@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import PropTypes from 'prop-types';
 import './Product.less';
 
 const Goods = (props) => {
@@ -14,11 +15,13 @@ const Goods = (props) => {
 
 const CommentList = (props) => { //评论列表
     return <div>
+        { props.children[0] }
         {
             props.list.map((item, i) => {
                 return <p key={ i }>{item.name}: {item.content}</p>
             })
         }
+        { props.children[1] }
     </div>
 }
 
@@ -30,8 +33,22 @@ class CommentForm extends Component { //写评论
             content: '',
         }
     }
+    componentWillMount() { //挂在前
+        console.log('will')
+    }
+
+    componentDidMount() {
+        console.log('dis')
+        this.input.focus();
+    }
+
+    componentWillUnmount() {
+        console.log('unwill');
+    }
+
     submitComment = () => {
         let {name, content} = this.state;
+        console.log(this.props.match.params)
         this.props.addComment(this.props.id, {name, content});
         this.setState({
             name: '',
@@ -45,17 +62,14 @@ class CommentForm extends Component { //写评论
     }
 
     render() {
-        if (this.props.isShowForm) {
-            return (
-                <div>
-                    <section>姓名：<input type="text" placeholder='请输入您的昵称' value={ this.state.name } onChange={ this.setValue.bind(this, 'name') }/></section>
-                    <section>内容：<input type="text" placeholder='请输入评论内容' value={ this.state.content } onChange={ this.setValue.bind(this,'content') }/></section>
-                    <button type='button' onClick={this.submitComment.bind(this)}>发布</button>
-                </div>
-            );
-        } else {
-            return null;
-        }
+        console.log('render')
+        return (
+            <div>
+                <section>姓名：<input type="text" placeholder='请输入您的昵称' value={ this.state.name } onChange={ this.setValue.bind(this, 'name') } ref={ (input) => { this.input = input} }/></section>
+                <section>内容：<input type="text" placeholder='请输入评论内容' value={ this.state.content } onChange={ this.setValue.bind(this,'content') }/></section>
+                <button type='button' onClick={this.submitComment.bind(this)}>发布</button>
+            </div>
+        );
 
     }
 }
@@ -65,7 +79,11 @@ class Comment extends Component { //评论组件
         super();
         this.state = {
             isShowForm: false,
+            content: '<b>xxxxxxxxxxxx</b>',
         }
+    }
+    static propTypes = {
+        commentList: PropTypes.object,
     }
 
     showCommentForm = () => {
@@ -76,8 +94,12 @@ class Comment extends Component { //评论组件
         return (
             <div>
                 <button type='button' onClick={ this.showCommentForm }>{ this.state.isShowForm ? '收起' : '评论'}</button>
-                <CommentForm isShowForm={ this.state.isShowForm } id={this.props.id} addComment={ this.props.addComment }/>
-                <CommentList list={this.props.commentList}/>
+                { this.state.isShowForm ? <CommentForm isShowForm={ this.state.isShowForm } id={this.props.id} addComment={ this.props.addComment }/> : '' }
+                <CommentList list={this.props.commentList}>
+                    <p>这个是嵌套进去的1</p>
+                    <p>这个是嵌套进去的2</p>
+                </CommentList>
+                <div dangerouslySetInnerHTML={{__html: this.state.content }}/>
             </div>
         )
     }
