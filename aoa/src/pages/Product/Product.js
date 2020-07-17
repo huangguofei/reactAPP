@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
+
 import './Product.less';
 
 const Goods = (props) => {
@@ -13,7 +14,7 @@ const Goods = (props) => {
     </div>
 }
 
-const CommentList = (props) => { //评论列表
+const CommentList = (props, context) => { //评论列表
     return <div>
         { props.children[0] }
         {
@@ -22,6 +23,7 @@ const CommentList = (props) => { //评论列表
             })
         }
         { props.children[1] }
+        <h3>{ context.parentName }</h3>
     </div>
 }
 
@@ -75,6 +77,9 @@ class CommentForm extends Component { //写评论
 }
 
 class Comment extends Component { //评论组件
+    static contextTypes = {
+        parentName: PropTypes.string,
+    }
     constructor() {
         super();
         this.state = {
@@ -83,7 +88,7 @@ class Comment extends Component { //评论组件
         }
     }
     static propTypes = {
-        commentList: PropTypes.object,
+        commentList: PropTypes.array,
     }
 
     showCommentForm = () => {
@@ -100,6 +105,7 @@ class Comment extends Component { //评论组件
                     <p>这个是嵌套进去的2</p>
                 </CommentList>
                 <div dangerouslySetInnerHTML={{__html: this.state.content }}/>
+                <p>祖宗传下来的信息： { this.context.parentName }</p>
             </div>
         )
     }
@@ -107,6 +113,9 @@ class Comment extends Component { //评论组件
 
 
 export default class Product extends Component {
+    static childContextTypes = {
+        parentName: PropTypes.string,
+    }
     constructor() {
         super();
         this.state = {
@@ -155,21 +164,28 @@ export default class Product extends Component {
                         }
                     ]
                 }],
+            name: '这个是父组件的名字：Tony',
+        }
+    }
+    getChildContext() {
+        return{
+            parentName: this.state.name,
         }
     }
     addComment = (id, comment) => {
-        console.log(id, comment);
         let productList = this.state.productList;
-        console.log(productList)
         productList.forEach((item) => {
             if(item.id == id) {
-                console.log(item.commentList)
                 item.commentList.push(comment);
-                console.log(item.commentList)
             }
         });
         this.setState({
             productList: productList,
+        })
+    }
+    changeName = () => {
+        this.setState({
+            name: 'xibei',
         })
     }
     render() {
@@ -178,6 +194,7 @@ export default class Product extends Component {
                 {this.state.productList.map((item, i) => {
                     return <Goods key={i} product={item} addComment={ this.addComment.bind(this) }/>
                 })}
+                <button type='button' onClick={ this.changeName }>修改名字</button>
             </div>
         )
     }
