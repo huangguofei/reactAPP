@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Loadable from 'react-loadable';
+import { Provider } from 'react-redux';
 import './index.less';
 import App from './App';
+import store from './state/store';
 
 
 
@@ -14,7 +15,9 @@ const getConfig = (message, callback) => {
 }
 ReactDOM.render(
     <Router getUserConfirmation={ getConfig } keyLength={ 12 }>
-        <App />
+        <Provider store={ store }>
+            <App />
+        </Provider>
     </Router>,
   document.getElementById('root')
 );
