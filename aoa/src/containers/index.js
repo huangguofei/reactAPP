@@ -1,37 +1,38 @@
+//组件懒加载
 import Loadable from "react-loadable";
 
 const Loading = () => null; //加载时不显示loading
 
 const Home = Loadable({
-    loader: () => import('./Home/Home'), //按需加载点击只加载一个页面
+    loader: () => import('./Home/index'), //按需加载点击只加载一个页面
     loading: Loading,
 });
 const Login = Loadable({
-    loader: () => import('./Login/Login'),
+    loader: () => import('./Login/index'),
     loading: Loading,
 });
 const Register = Loadable({
-    loader: () => import('./Register/Register'),
+    loader: () => import('./Register/index'),
     loading: Loading,
 });
 
 const List = Loadable({
-    loader: () => import('./List/List'),
+    loader: () => import('./List/index'),
     loading: Loading,
 });
 
 const Product = Loadable({
-    loader: () => import('./Product/Product'),
+    loader: () => import('./Product/index'),
     loading: Loading,
 });
 
 const Goods = Loadable({
-    loader: () => import('./Goods/Goods'),
+    loader: () => import('./Goods/index'),
     loading: Loading,
 });
 
 const NotFound = Loadable({
-    loader: () => import('./NotFound/NotFound'),
+    loader: () => import('./NotFound/index'),
     loading: Loading,
 });
 

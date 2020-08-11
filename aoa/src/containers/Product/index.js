@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 
-import './Product.less';
+import './style.less';
 
 const Goods = (props) => {
 
@@ -112,7 +112,7 @@ class Comment extends Component { //评论组件
 }
 
 
-export default class Product extends Component {
+export default class Index extends Component {
     static childContextTypes = {
         parentName: PropTypes.string,
     }

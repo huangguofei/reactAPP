@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 // import { createHashHistory } from History
-import {Home, Login, Register, Product, Goods, List, NotFound} from './pages';
+import {Home, Login, Register, Product, Goods, List, NotFound} from './containers';
 
 const routes = [{
     path: '/home',

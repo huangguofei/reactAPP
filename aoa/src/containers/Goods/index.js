@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import '../../component/CreatedComment';
-import './Goods.less';
+import './style.less';
 import CreatedComment from "../../component/CreatedComment";
 
- class Goods extends Component{
+ class Index extends Component{
     constructor() {
         super();
         this.state = {
@@ -56,5 +56,5 @@ import CreatedComment from "../../component/CreatedComment";
         )
     }
 }
-Goods = CreatedComment(Goods, {name: 'xxxxxxx'});
-export default Goods;
+Index = CreatedComment(Index, {name: 'xxxxxxx'});
+export default Index;

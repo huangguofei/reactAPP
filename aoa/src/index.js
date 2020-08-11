@@ -5,8 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import './index.less';
 import App from './App';
-import store from './state/store';
-
+import store from './redux';
 
 
 const getConfig = (message, callback) => {

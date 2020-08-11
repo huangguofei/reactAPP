@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import './List.less';
+import './style.less';
 
-export default class List extends Component{
+export default class Index extends Component{
     render() {
         return(
             <div className='list'>

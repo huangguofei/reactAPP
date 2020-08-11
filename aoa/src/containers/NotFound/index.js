@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import './NotFound.less';
+import './style.less';
 
-export default class NotFound extends Component{
+export default class Index extends Component{
     render() {
         return(
             <div>

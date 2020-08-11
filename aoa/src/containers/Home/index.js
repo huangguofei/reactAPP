@@ -1,6 +1,6 @@
 import React, { Component, useRef, forwardRef } from "react";
 import { Link } from "react-router-dom";
-import './Home.less';
+import './style.less';
 
 const Input = forwardRef(({ type, placeholder}, ref) => {
     return <input type={ type } ref={ ref } placeholder={ placeholder }/>
@@ -64,7 +64,7 @@ class Count extends Component {
     }
 }
 
-export default class Home extends Component {
+export default class Index extends Component {
     constructor() {
         super();
         this.state = {
@@ -77,6 +77,9 @@ export default class Home extends Component {
             info: {name: '王大娘', age: 19},
         })
     }
+    toProduct = () => {
+        this.props.history.push('/product')
+    }
 
     render() {
         const isLogin = false;
@@ -88,8 +91,8 @@ export default class Home extends Component {
                 <Count nameText='tony' info={this.state.info} onClick={() => {
                     alert('归零成功！')
                 }}/>
-                <button type='button' onClick={this.changeInfo}>修改操作人信息</button>
-                <Link to='/product'>商品页</Link>
+                <button type='button' onClick={ this.changeInfo }>修改操作人信息</button>
+                <button type='button' onClick={ this.toProduct }>查看商品</button>
             </div>
         )
     }

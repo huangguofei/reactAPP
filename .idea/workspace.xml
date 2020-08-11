@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c61beaca-3b9e-479e-83c4-9fd87095232e" name="默认的" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,6 +13,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Less File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -32,11 +32,13 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test/redux" />
+    <property name="last_opened_file_path" value="F:/AOAAPP/widget" />
+    <property name="list.type.of.created.stylesheet" value="Less" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\React\aoa\src\redux\modules" />
       <recent name="E:\React\aoa\src\state" />
     </key>
   </component>
@@ -65,7 +67,8 @@
       <workItem from="1592981839067" duration="1251000" />
       <workItem from="1593307807381" duration="6261000" />
       <workItem from="1595211065798" duration="8158000" />
-      <workItem from="1596765273595" duration="3209000" />
+      <workItem from="1596765273595" duration="3211000" />
+      <workItem from="1597023643340" duration="24539000" />
     </task>
     <servers />
   </component>
