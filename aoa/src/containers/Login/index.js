@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
+import {get, post} from '../../utils/ajax';
+import URL from '../../utils/url';
 import './style.less';
 
 class Index extends Component {
@@ -16,9 +18,33 @@ class Index extends Component {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+
+    }
+
+    componentWillMount() {
+        get(URL.GET_COUNTRY_CODE).then(res => {
+            console.log(res)
+        })
+        // axios.get(URL.GET_COUNTRY_CODE, {params: {}},
+        //     {
+        //         headers: {
+        //             'token': 'NDM3YzA3NGU4MjU5M2M0YTVjMDczZWY5NjI5Mzk2YTE=',
+        //             'Content-Type': 'application/json;charset=utf-8'
+        //         }
+        //     })
+        //     .then((login) => {
+        //         console.log(login)
+        //     });
+    }
+
     login = (e) => {
         console.log(this);
-        alert('登录成功！');
+        post(URL.CHAT_LIST).then(res => {
+            console.log(res)
+        });
+
+        return;
         this.setState({
             loginFlag: true,
         });
@@ -33,17 +59,13 @@ class Index extends Component {
         if (this.state.loginFlag) {
             return <Redirect to='/'/>
         }
-        const {PayIncrease, PayDecrease, clear} = this.props;
         return (
             <div>
                 <h3>登录页面</h3>
-                <input type="text" value={this.state.formData.mobile} onChange={this.setValue('formData.mobile', this)}/>
+                <input type="text" value={this.state.formData.mobile}
+                       onChange={this.setValue.bind('formData.mobile', this)}/>
                 <button type='button' className='login' onClick={this.login}>登录</button>
                 <Link to='register'> 注册</Link>
-                <p>{this.props.tiger}</p>
-                <button type='button' onClick={PayIncrease}>增加</button>
-                <button type='button' onClick={PayDecrease}>减少</button>
-                <button type='button' onClick={clear}>清除</button>
             </div>
 
         )
@@ -63,5 +85,3 @@ function mapDispatchToProps(dispatch) {
         clear: () => dispatch({type: 'clear'}),
     }
 }
-
-export default Index = connect(mapStateToProps, mapDispatchToProps)(Index)

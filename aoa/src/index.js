@@ -5,8 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import './index.less';
 import App from './App';
-import store from './redux';
-
+import store from './redux/index';
 
 const getConfig = (message, callback) => {
     const allowTransition = window.confirm(message);

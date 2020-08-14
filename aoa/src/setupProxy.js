@@ -1,13 +1,22 @@
 const {createProxyMiddleware} = require('http-proxy-middleware');
 
-module.exports = (app) => {
+module.exports = function (app) {
     app.use(
-        createProxyMiddleware('/xxx', {
+        createProxyMiddleware('/api', {
             target: 'http://wanzhans.com:81/',
             changeOrigin: true,
             pathRewrite: {
                 // '^/api': '',
             }
-        }))
-    // app.use()
+        })
+    )
+    // app.use(
+    //     createProxyMiddleware('/', {
+    //         target: 'http://wanzhans.com:81/',
+    //         changeOrigin: true,
+    //         pathRewrite: {
+    //             // '^/api': '',
+    //         }
+    //     })
+    // )
 }

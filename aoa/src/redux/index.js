@@ -1,6 +1,13 @@
-import reducer from "../store/reducer";
-import { createStore } from "redux";
+import {combineReducers, createStore} from "redux";
+import app from './modules/app';
+import login from './modules/login';
+import product from './modules/product';
 
-const store = createStore(reducer);
+const rootReducer = combineReducers({
+    app,
+    login,
+    product,
+});
 
-export default store;
+
+export default createStore(rootReducer);

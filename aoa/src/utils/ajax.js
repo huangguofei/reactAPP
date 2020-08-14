@@ -1,67 +1,49 @@
-import * as URL from './url';
+import axios from 'axios';
 
-function getParam() {
+axios.defaults.timeout = 10000; //超时
+
+
+function headers() {
     return {
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
-            token: '',
+            token: 'NDM3YzA3NGU4MjU5M2M0YTVjMDczZWY5NjI5Mzk2YTE=',
         }
     }
 }
 
-function changeURLArg(url, params) {
-    let returnUrl = url;
-    for (var key in params) {
-        returnUrl = setParam(key, params[key]);
-    }
 
-    function setParam(arg, arg_val) {
-        var pattern = arg + '=([^&]*)';
-        var replaceText = arg + '=' + arg_val;
-        if (returnUrl.match(pattern)) {
-            var tmp = '/(' + arg + '=)([^&]*)/gi';
-            tmp = returnUrl.replace(eval(tmp), replaceText);
-            return tmp;
-        } else {
-            if (returnUrl.match('[\?]')) {
-                return returnUrl + '&' + replaceText;
-            } else {
-                return returnUrl + '?' + replaceText;
+function get(url, data) {
+
+    return new Promise((resolve, reject) => {
+        axios.get(url, {
+            params: data,
+            ...headers(),
+        }).then(res => {
+            console.log('请求成功：' + res)
+            resolve(res.data);
+        }).catch(err => {
+            console.log('请求错误：' + err)
+            reject(err);
+        });
+    })
+}
+
+function post(url, data={}) {
+    return new Promise(((resolve, reject) => {
+        axios.post(url, data,{
+            headers: {
+                // 'Content-Type': 'application/json',
+                token: 'NDM3YzA3NGU4MjU5M2M0YTVjMDczZWY5NjI5Mzk2YTE=',
             }
-        }
-    }
-
-    return returnUrl;
+        }).then(res => {
+            console.log('请求成功：' + res)
+            resolve(res.data);
+        }).catch(err => {
+            console.log('请求错误：' + err)
+            reject(err);
+        });
+    }))
 }
 
-function get(urlType, data) {
-    const param = {
-        method: 'get',
-        ...getParam(),
-    };
-    const _url = data ? changeURLArg(URL[urlType], data) : URL[urlType];
-
-    return fetch(_url, param).then(response => {
-        console.log('请求成功：' + response)
-        return response;
-    }).catch(err => {
-        console.log('请求错误：' + err)
-        return err;
-    })
-}
-
-function post(urlType, data) {
-    const param = {
-        method: 'post',
-        ...getParam(),
-        body: JSON.stringify(data),
-    }
-    return fetch(URL[urlType], param).then(response => {
-        console.log('请求成功：' + response)
-        return response;
-    }).catch(err => {
-        console.log('请求错误：' + err)
-        return err;
-    })
-}
-export default { get, post };
+export {get, post};
