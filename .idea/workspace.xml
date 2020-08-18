@@ -32,7 +32,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="F:/AOAAPP/widget" />
+    <property name="last_opened_file_path" value="F:/AOAAPP" />
     <property name="list.type.of.created.stylesheet" value="Less" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
     <property name="ts.external.directory.path" value="D:\soft\WebStorm 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
@@ -69,7 +69,8 @@
       <workItem from="1593307807381" duration="6261000" />
       <workItem from="1595211065798" duration="8158000" />
       <workItem from="1596765273595" duration="3211000" />
-      <workItem from="1597023643340" duration="66691000" />
+      <workItem from="1597023643340" duration="83504000" />
+      <workItem from="1597715583888" duration="6438000" />
     </task>
     <servers />
   </component>
@@ -81,7 +82,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

@@ -40,6 +40,7 @@ import CreatedComment from "../../component/CreatedComment";
     render() {
         return(
             <div>
+                <p>id: { this.props.match.params.id }</p>
                 <p>这里是商品详情页</p>
                 { this.props.children }
                 <select  value={ this.state.index }  onChange={ this.changeSelect }>

@@ -1,12 +1,13 @@
 import React, {Component} from "react";
-import PropTypes from 'prop-types';
-import {getList} from '../../redux/modules/product';
+import PropTypes, {func} from 'prop-types';
+import { actions as productActions } from '../../redux/modules/product';
 import Goods from "./component/goods";
 import './style.less';
 import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 
 class Index extends Component {
-    static childContextTypes = {
+    static childContextTypes = { //context 格式限制
         parentName: PropTypes.string,
     }
 
@@ -15,9 +16,15 @@ class Index extends Component {
         this.state = {
             name: '这个是父组件的名字：Tony',
         }
+
+    }
+    componentWillMount() {
+        this.props.loadList();
+    }
+    componentDidMount() {
     }
 
-    getChildContext() {
+    getChildContext() { //设置context值
         return {
             parentName: this.state.name,
         }
@@ -39,24 +46,33 @@ class Index extends Component {
             name: 'xibei',
         })
     }
+    skipAddProduct = () => {
 
+    }
+    deleteGoods = (productId) => {
+        this.props.deleteProduct(productId);
+    }
     render() {
+        const { productList } = this.props;
         return (
             <div className='product'>
-                {this.state.list.map((item, i) => {
-                    return <Goods key={i} product={item} addComment={this.addComment.bind(this)}/>
+                { Object.keys(productList).map( key => {
+                    return <Goods key={key} product={productList[key]} deleteProduct={ this.deleteGoods } addComment={this.addComment.bind(this)}/>
                 })}
-                <button type='button' onClick={this.changeName}>修改名字</button>
+                <div className="btn-group">
+                    <button type='button' onClick={this.skipAddProduct}>新增商品</button>
+                    <button type='button' onClick={this.changeName}>修改名字</button>
+                </div>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state, props) => ({
-    list: getList(),
+    productList: state.product.productList,
 });
-const mapDispatchToProps = () => {
-
-}
+const mapDispatchToProps = dispatch => ({
+    ...bindActionCreators(productActions, dispatch),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);
